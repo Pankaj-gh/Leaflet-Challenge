@@ -59,3 +59,37 @@ function createMap(data) {
         else {
             color = 'darkred'
         }
+
+
+        L.circle([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], {
+            color: color,
+            fillColor: color,
+            fillOpacity: 0.75,
+            radius: magnitude*50000
+        }).bindPopup(`<h3> Magnitude: ${feature.properties.mag}</h3> <h3>Depth: ${feature.geometry.coordinates[2]}</h3> <p> ${feature.properties.place} </p>`).addTo(myMap)
+
+
+
+    })
+
+    var legend=L.control({
+        position: 'bottomright'
+        });
+    
+        legend.onAdd=function(){
+            legendDiv=L.DomUtil.create('div', 'legend');
+    
+            // create rectangles to represent each "color"
+            var colors = ['lightpink', 'lightcoral', 'deeppink', 'indianred', 'firebrick', 'darkred'];
+            // under each rectangle would be the range of values
+            var range = ['<100', '100-200', '200-300', '300-400', '400-500', '500+']
+            // forEach
+            for (var i=0; i <colors.length; i++){
+                legendDiv.innerHTML +=
+                '<li style="background-color:'+ colors [i] + '">' + range[i] + '</li>'
+    
+            }
+        
+            return legendDiv;
+        }.addTo(myMap)
+    };
