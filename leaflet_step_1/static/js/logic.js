@@ -26,3 +26,36 @@ function createMap(data) {
         id: "streets-v11",
         accessToken: API_KEY
     }).addTo(myMap);
+
+
+
+     // iterate through the data for each earthquake instance
+     data.forEach(feature => {
+        // set magnitude variable
+        var magnitude = feature.properties.mag;
+        var depth = feature.geometry.coordinates[2]
+        console.log(depth)
+
+        // switch statement for color
+        var color = ''
+
+        if (depth <= 100){
+            color = 'lightpink';
+        }
+        else if (depth <= 200){
+            color = 'lightcoral'
+        }
+        else if (magnitude <= 300){
+            color ='deeppink'
+        }
+
+        else if (magnitude <= 400){
+            color = 'indianred'
+        }
+
+        else if (magnitude <= 500) {
+            color = 'firebrick'
+        }
+        else {
+            color = 'darkred'
+        }
